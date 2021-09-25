@@ -17,7 +17,7 @@ type studentService struct {
 	students []entity.Students
 }
 
-func NewStudents() StudentService {
+func NewStudentsService() StudentService {
 	return &studentService{}
 }
 

@@ -10,25 +10,25 @@ import (
 )
 
 type StudentsInterface interface {
-	FindAll(ctx *gin.Context)
-	Register(ctx *gin.Context)
+	FindAllStudents(ctx *gin.Context)
+	RegisterStudents(ctx *gin.Context)
 }
 
 type studentsController struct {
 	service service.StudentService
 }
 
-func New(service service.StudentService) StudentsInterface {
+func NewStudentsInterface(service service.StudentService) StudentsInterface {
 	return &studentsController{
 		service: service,
 	}
 }
 
-func (c *studentsController) FindAll(ctx *gin.Context) {
-	ctx.JSON(201, c.service.FindAll())
+func (c *studentsController) FindAllStudents(ctx *gin.Context) {
+	ctx.JSON(201, c.service.FindAllStudents())
 }
 
-func (c *studentsController) Register(ctx *gin.Context) {
+func (c *studentsController) RegisterStudents(ctx *gin.Context) {
 	var student entity.Students
 	var studentRequest entity.StudentsRequest
 	ctx.BindJSON(&studentRequest)
@@ -48,7 +48,7 @@ func (c *studentsController) Register(ctx *gin.Context) {
 		student.Gender = studentRequest.Gender
 		student.Password = studentRequest.Password
 		student.Address = studentRequest.Address
-		result, err := c.service.Register(student)
+		result, err := c.service.RegisterStudents(student)
 
 		if err != nil {
 			ctx.JSON(500, gin.H{

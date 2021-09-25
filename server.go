@@ -11,8 +11,8 @@ import (
 )
 
 var (
-	studentsService    service.StudentService       = service.New()
-	studentsController interfaces.StudentsInterface = interfaces.New(studentsService)
+	studentsService    service.StudentService       = service.NewStudentsService()
+	studentsController interfaces.StudentsInterface = interfaces.NewStudentsInterface(studentsService)
 )
 
 func main() {
@@ -28,7 +28,7 @@ func main() {
 		}
 	}
 
-	server.POST("/add", studentsController.Register)
+	server.POST("/add", studentsController.RegisterStudents)
 
 	// server.GET("/", func(c *gin.Context) {
 	// 	c.JSON(200, gin.H{
